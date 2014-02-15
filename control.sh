@@ -11,9 +11,6 @@
 # Configure
 # #################################################################
 
-# grab the configuration
-source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/"config.sh;
-
 function zen(){
 
     # #################################################################
@@ -21,9 +18,12 @@ function zen(){
     # #################################################################
     if [ "$1" == 'help' ]; then
 
-
         if [ "$2" == 'var' ]; then
             echo "name_project..............$name_project";
+            echo "name_client...............$name_client";
+            echo "dir_script................$dir_script";
+            echo "dir_config................$dir_config";
+            echo "script_filename...........$script_filename";
             echo "dir_backup................$dir_backup";
             echo "dir_backup_org............$dir_backup_org";
             echo "dir_backup_new............$dir_backup_new";
@@ -32,7 +32,7 @@ function zen(){
             echo "root_stage................$root_stage";
             echo "dir_stage.................$dir_stage";
             echo "url_stage.................$url_stage";
-            echo "url_live..................$url_live";
+            echo "url.......................$url";
             echo "host_name.................$host_name";
             echo "host_user.................$host_user";
             echo "host_pass.................$host_pass";
