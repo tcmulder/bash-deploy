@@ -1,14 +1,19 @@
 #!/bin/sh
 
 # #################################################################
-# Create Backup Directories
-# creates basic backup directories for new and old code
+# SSH Into Remote Server
+# Connects to server via SSH
 # #################################################################
+
+# if the doctor was called
+if [ $1 == 'help' ]; then
+	echo "zen ssh ...................... SSH into remote server";
+	exit;
+fi
 
 # -----------------------------------------------------------------
 # Handle Errors
 # -----------------------------------------------------------------
-
 function error_exit(){
     echo "* error: $1";
     exit
@@ -17,32 +22,19 @@ function error_exit(){
 # -----------------------------------------------------------------
 # Capture Arguments
 # -----------------------------------------------------------------
-
-dir_backup=$1;
-dir_backup_org=$2;
-dir_backup_new=$3;
+host_pass=$1;
+host_user=$2;
+host_name=$3;
 
 # -----------------------------------------------------------------
-# Create Backup Directories
+# SSH Into Remote Server
 # -----------------------------------------------------------------
 
-# make the parent backup directory and enter it
-mkdir -p $dir_backup || error_exit "backup directory could not be created";
-cd $dir_backup;
+# copy ssh password to clipboard
+echo "$host_pass SSH password on clipboard";
+echo "$host_pass" | pbcopy;
 
-# make the new and org directories
-mkdir -p $dir_backup_org;
-mkdir -p $dir_backup_new;
-
-# enter the org directory and create code/db directories
-cd $dir_backup_org;
-mkdir -p code;
-mkdir -p db;
-
-# enter the new directory and create code/db directories
-cd ../;
-cd $dir_backup_new;
-mkdir -p code;
-mkdir -p db;
+# ssh in
+ssh "$host_user"@"$host_name";
 
 exit;
