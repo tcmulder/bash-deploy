@@ -9,9 +9,31 @@
 # Output Help Info
 # -----------------------------------------------------------------
 
-# if help was requested
+# output help if requested
 if [ $1 == 'help' ]; then
 	echo "zen backup ................... Create dated backup directory structure";
+	exit;
+fi
+
+# -----------------------------------------------------------------
+# Perform Doctor Diagnosis
+# -----------------------------------------------------------------
+
+# if help was requested
+if [ $1 == 'doctor' ]; then
+	# source the configuration file
+	source $2;
+	# tell the user the check is taking place
+    big_echo 'Checking Backup Directory';
+
+    if [ -d $dir_backup ]; then
+        echo "Size of "$dir_backup;
+        du -ch $dir_backup | grep total;
+        alert_success "Backup directory exists"
+    else
+        alert_error "Backup directory not found";
+    fi
+
 	exit;
 fi
 

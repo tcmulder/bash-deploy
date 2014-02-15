@@ -11,7 +11,7 @@
 
 # output help if requested
 if [ $1 == 'help' ]; then
-	echo "zen ssh ...................... SSH into remote server";
+	echo "zen ssh ...................... SSH into stage server";
 	exit;
 fi
 
@@ -25,16 +25,16 @@ if [ $1 == 'doctor' ]; then
 	source $2;
 
 	# tell the user the check is taking place
-    big_echo "Checking $host_name SSH Connection";
+    big_echo "Checking staging $host_stage_name SSH Connection";
 
     # copy ssh password to clipboard
-    echo "$host_pass SSH password on clipboard";
-    echo "$host_pass" | pbcopy;
+    echo "$host_stage_pass SSH password on clipboard";
+    echo "$host_stage_pass" | pbcopy;
 
     # set up what success message would look like
-    ssh_confirm="SSH connection to $host_name successful";
+    ssh_confirm="SSH connection to $host_stage_name successful";
     # try to connect and store the message
-    ssh_return=`ssh "$host_user"@"$host_name" echo "$ssh_confirm"; exit;`;
+    ssh_return=`ssh "$host_stage_user"@"$host_stage_name" echo "$ssh_confirm"; exit;`;
 
     # if the returned message confirms success
     if [ "$ssh_return" == "$ssh_confirm" ]; then
@@ -57,10 +57,10 @@ fi
 source $1;
 
 # copy ssh password to clipboard
-echo "$host_pass SSH password on clipboard";
-echo "$host_pass" | pbcopy;
+echo "$host_stage_pass staging SSH password on clipboard";
+echo "$host_stage_pass" | pbcopy;
 
 # ssh in
-ssh "$host_user"@"$host_name" || error_exit "connection to \"$host_name\" failed";
+ssh "$host_stage_user"@"$host_stage_name" || error_exit "connection to \"$host_stage_name\" failed";
 
 exit;

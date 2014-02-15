@@ -1,28 +1,45 @@
 #!/bin/sh
 
-# if the doctor was called
-if [ $1 == 'doctor' ]; then
-	echo "zen doctor ................... Check all configuration variables";
-	exit;
-fi
-
-# source the configuration file
-source $1;
-# echo "anything?";
-# echo $1;
-# echo $dir_script;
-# bash "$dir_script"/backup.sh 'doctor';
-# bash "$dir_script"/ssh.sh 'doctor';
-
-for module in $dir_script/modules/*
-do
-  bash $module 'doctor';
-done
-
 # # #################################################################
 # # Doctor
 # # checks if there are any issues with the config.sh variables
 # # #################################################################
+
+# -----------------------------------------------------------------
+# Output Help Info
+# -----------------------------------------------------------------
+
+# if help was requested
+if [ $1 == 'help' ]; then
+	echo "zen doctor ................... Check configuration";
+	exit;
+fi
+
+# -----------------------------------------------------------------
+# Perform Doctor Diagnosis
+# -----------------------------------------------------------------
+
+# ignore calls to self
+if [ $1 == 'doctor' ]; then
+	exit;
+fi
+
+# -----------------------------------------------------------------
+# Request Checkup on All Commands
+# -----------------------------------------------------------------
+
+# source the configuration file
+source $1;
+
+# for all of the modules
+for module in $dir_script/modules/*
+do
+	# call for diagnosis and pass in the configuration file
+	bash $module 'doctor' $1;
+done
+
+exit;
+
 
 # # -----------------------------------------------------------------
 # # Establish Variables
