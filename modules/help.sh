@@ -26,42 +26,23 @@ if [ $1 == 'doctor' ]; then
 	# tell the user the check is taking place
     big_echo 'Checking Help Resources';
 
-	# variable to store true if any help exists
-    module_help=0;
-    # variable to help output
-    help_output='';
-
     # look for modules
     for module in $dir_script/modules/*
     do
-
-    	help_output=`bash $module 'help'`;
+    	# get the module's name
     	module_name=$(basename "$module");
-
+    	# ask for help output
+    	help_output=`bash $module 'help'`;
+    	# if the help output isn't empty
     	if [ ! -z "$help_output" ]; then
+    		# show success
 	    	alert_success "$module_name has help available";
-	    	module_help=1;
+    	# if the help output is empty
     	else
+    		# show failure
 			alert_error "$module_name has no help available";
     	fi
-
     done
-
-    if [ $module_help == 0 ]; then
-    	alert_error "No help resources available";
-    fi
-
-    # # if there exists data in the module counter
-    # if [ ! -z "$help_output" ]; then
-    # 	# show the available modules
-    # 	printf -- '%s\n' "${module_help[@]}"
-    # 	# show success
-    # 	alert_success "Help resources available"
-    # # if there is no module data
-    # else
-    # 	# show failure
-    # 	alert_error "No help resources available";
-    # fi
 
 	exit;
 fi

@@ -44,23 +44,42 @@ fi
 # source the configuration file
 source $1;
 
+# if the backup directory already exists
+if [ -d "$dir_backup" ]; then
+    # exit with error
+    error_exit "backup directory already exists";
+fi
+
 # make the parent backup directory and enter it
 mkdir -p $dir_backup || error_exit "backup directory could not be created";
 cd $dir_backup;
 
 # make the new and org directories
-mkdir -p $dir_backup_org;
-mkdir -p $dir_backup_new;
+mkdir -p $dir_backup"/org";
+mkdir -p $dir_backup"/new";
 
 # enter the org directory and create code/db directories
-cd $dir_backup_org;
+cd $dir_backup"/org";
 mkdir -p code;
 mkdir -p db;
 
 # enter the new directory and create code/db directories
 cd ../;
-cd $dir_backup_new;
+cd $dir_backup"/new";
 mkdir -p code;
 mkdir -p db;
+
+# if the backup directory now exists
+if [ -d $dir_backup ]; then
+    # show the size of the directory
+    echo "Size of "$dir_backup;
+    du -ch $dir_backup | grep total;
+    # report success
+    alert_success "Backup directory exists";
+# if the directory doesn't exist now
+else
+    # exit with error
+    error_exit "Backup directory not created";
+fi
 
 exit;

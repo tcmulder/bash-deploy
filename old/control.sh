@@ -226,3 +226,34 @@ function zen(){
     #     echo "$@ command not found"
     # fi
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DB:
+
+# # if not asked for the stage database
+# if [ "$version" != "stage" ]; then
+
+#   # copy ssh password to clipboard
+#   echo "$host_pass SSH password on clipboard";
+#   echo "$host_pass" | pbcopy;
+
+#   # download database dump into backup directory
+#   ssh "$host_user"@"$host_name" "mysqldump -h$db_host -u$db_user -p$db_pass $db_name" | pv | cat - > "$dir_backup_version"db/"$version"_db.sql;
+
+# # if asked for the stage database
+# else
