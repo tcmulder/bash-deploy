@@ -19,7 +19,7 @@ fi
 # Perform doctor diagnosis
 # -----------------------------------------------------------------
 
-# if help was requested
+# if diagnostics were requested
 if [ $1 == 'doctor' ]; then
 	# source the configuration file
 	source $2;

@@ -9,7 +9,7 @@
 # Output help info
 # -----------------------------------------------------------------
 
-# if help was requested
+# if diagnostics were requested
 if [ $1 == 'help' ]; then
 	echo "zen doctor ................... Check configuration";
 	exit;
