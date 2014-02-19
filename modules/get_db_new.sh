@@ -2,7 +2,7 @@
 
 # #################################################################
 # Get Database
-# Dumps a database and saves it under a given file name
+# dumps a database and saves it under a given file name
 # #################################################################
 
 
@@ -85,7 +85,7 @@ if [ ! -f $file_dump ]; then
         fi
 
     else
-        # asdf
+        # report error
         alert_exit "Backup directory does not exist";
 
     fi
