@@ -72,6 +72,7 @@ url='http://YOUR_SERVER_ADDRESS/sites/iortho/iortho';
 # Common functions
 # -----------------------------------------------------------------
 
+# grab common functions
 source $dir_script/functions.sh
 
 # -----------------------------------------------------------------
