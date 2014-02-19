@@ -6,7 +6,7 @@
 # #################################################################
 
 # -----------------------------------------------------------------
-# Output Help Info
+# Output help info
 # -----------------------------------------------------------------
 
 # output help if requested
@@ -16,7 +16,7 @@ if [ $1 == 'help' ]; then
 fi
 
 # -----------------------------------------------------------------
-# Perform Doctor Diagnosis
+# Perform doctor diagnosis
 # -----------------------------------------------------------------
 
 # if help was requested
@@ -43,14 +43,14 @@ if [ $1 == 'doctor' ]; then
     # if the returned message doesn't confirm success
     else
         # show the error to the user
-        alert_error "Error connecting via SSH: $ssh_return";
+        alert_error "Error connecting via SSH $ssh_return";
     fi
 
  	exit;
 fi
 
 # -----------------------------------------------------------------
-# SSH Into Remote Server
+# SSH Into remote server
 # -----------------------------------------------------------------
 
 # source the configuration file
@@ -61,6 +61,6 @@ echo "$host_stage_pass staging SSH password on clipboard";
 echo "$host_stage_pass" | pbcopy;
 
 # ssh in
-ssh "$host_stage_user"@"$host_stage_name" || error_exit "connection to \"$host_stage_name\" failed";
+ssh "$host_stage_user"@"$host_stage_name" || alert_exit "connection to \"$host_stage_name\" failed";
 
 exit;

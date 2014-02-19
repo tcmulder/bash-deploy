@@ -2,11 +2,11 @@
 
 # #################################################################
 # Output Help
-# shows the user all available commands
+# Shows the user all available commands
 # #################################################################
 
 # -----------------------------------------------------------------
-# Output Help Info
+# Output help info
 # -----------------------------------------------------------------
 
 # output help if requested
@@ -16,7 +16,7 @@ if [ $1 == 'help' ]; then
 fi
 
 # -----------------------------------------------------------------
-# Perform Doctor Diagnosis
+# Perform doctor diagnosis
 # -----------------------------------------------------------------
 
 # if help was requested
@@ -48,7 +48,7 @@ if [ $1 == 'doctor' ]; then
 fi
 
 # -----------------------------------------------------------------
-# Request Help for All Commands
+# Request help for all commands
 # -----------------------------------------------------------------
 
 # source the configuration file

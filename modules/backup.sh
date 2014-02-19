@@ -2,11 +2,11 @@
 
 # #################################################################
 # Create Backup Directories
-# creates basic backup directories for new and old code
+# Creates basic backup directories for new and old code
 # #################################################################
 
 # -----------------------------------------------------------------
-# Output Help Info
+# Output help info
 # -----------------------------------------------------------------
 
 # output help if requested
@@ -16,7 +16,7 @@ if [ $1 == 'help' ]; then
 fi
 
 # -----------------------------------------------------------------
-# Perform Doctor Diagnosis
+# Perform doctor diagnosis
 # -----------------------------------------------------------------
 
 # if help was requested
@@ -26,11 +26,16 @@ if [ $1 == 'doctor' ]; then
 	# tell the user the check is taking place
     big_echo 'Checking Backup Directory';
 
+    # if the backup directory exists
     if [ -d $dir_backup ]; then
+        # show the file size of the backup directory
         echo "Size of "$dir_backup;
         du -ch $dir_backup | grep total;
+        # report success
         alert_success "Backup directory exists"
+    # if no backup directory exists
     else
+        # report error
         alert_error "Backup directory not found";
     fi
 
@@ -38,7 +43,7 @@ if [ $1 == 'doctor' ]; then
 fi
 
 # -----------------------------------------------------------------
-# Create Backup Directories
+# Create backup directories
 # -----------------------------------------------------------------
 
 # source the configuration file
@@ -47,11 +52,11 @@ source $1;
 # if the backup directory already exists
 if [ -d "$dir_backup" ]; then
     # exit with error
-    error_exit "backup directory already exists";
+    alert_exit "backup directory already exists";
 fi
 
 # make the parent backup directory and enter it
-mkdir -p $dir_backup || error_exit "backup directory could not be created";
+mkdir -p $dir_backup || alert_exit "backup directory could not be created";
 cd $dir_backup;
 
 # make the new and org directories
@@ -79,7 +84,7 @@ if [ -d $dir_backup ]; then
 # if the directory doesn't exist now
 else
     # exit with error
-    error_exit "Backup directory not created";
+    alert_exit "Backup directory not created";
 fi
 
 exit;

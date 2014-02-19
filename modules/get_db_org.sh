@@ -2,12 +2,12 @@
 
 # #################################################################
 # Get Database
-# dumps a database and saves it under a given file name
+# Dumps a database and saves it under a given file name
 # #################################################################
 
 
 # -----------------------------------------------------------------
-# Output Help Info
+# Output help info
 # -----------------------------------------------------------------
 
 # output help if requested
@@ -17,7 +17,7 @@ if [ $1 == 'help' ]; then
 fi
 
 # -----------------------------------------------------------------
-# Perform Doctor Diagnosis
+# Perform doctor diagnosis
 # -----------------------------------------------------------------
 
 # if help was requested
@@ -40,14 +40,10 @@ if [ $1 == 'doctor' ]; then
         alert_error 'Could not connect to database';
     # if the tables exist
     else
-    	# store the array of return data
+        # store the array of return data
         table_array=($ssh_return);
-        # loop through the array of returned data
-        for table_name in "${table_array[@]}"
-            do
-            	# show value of this array item to user
-                echo "$table_name"
-        done
+        # report number of tables found
+        echo "tables recorded:  ${#table_array[@]}";
         # report success
         alert_success 'Connected to database'
     fi
@@ -56,7 +52,7 @@ if [ $1 == 'doctor' ]; then
 fi
 
 # -----------------------------------------------------------------
-# Get Database
+# Get database
 # -----------------------------------------------------------------
 
 # source the configuration file
@@ -90,14 +86,14 @@ if [ ! -f $file_dump ]; then
 
     else
         # asdf
-        error_exit "Backup directory does not exist";
+        alert_exit "Backup directory does not exist";
 
     fi
 
 # if the dump file already exists
 else
     # exit with error
-    error_exit "The dump file exist $file_dump";
+    alert_exit "The dump file exist $file_dump";
 
 fi
 
