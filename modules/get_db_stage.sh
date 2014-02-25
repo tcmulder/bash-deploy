@@ -27,14 +27,14 @@ if [ $1 == 'doctor' ]; then
     source $2;
 
     # tell the user the check is taking place
-    big_echo "Checking remote $db_name Database";
+    big_echo "Checking remote $db_stage_name Database";
 
     # copy the ssh password
-    echo "$host_pass SSH password on clipboard";
-    echo "$host_pass" | pbcopy;
+    echo "$host_stage_pass SSH password on clipboard";
+    echo "$host_stage_pass" | pbcopy;
 
     # connect to the remote database and list tables
-    ssh_return=`ssh "$host_user"@"$host_name" "mysql -h$db_host -u$db_user -p$db_pass $db_name -e 'SHOW TABLES'"`;
+    ssh_return=`ssh "$host_stage_user"@"$host_stage_name" "mysql -h$db_stage_host -u$db_stage_user -p$db_stage_pass $db_stage_name -e 'SHOW TABLES'"`;
 
     # if the list of tables is empty
     if [ ${#ssh_return} == 0 ]; then
@@ -88,11 +88,11 @@ if [ ! -f $file_dump ]; then
     if [ -d $dir_for_dump ]; then
 
         # copy ssh password to clipboard
-        echo "$host_pass SSH password on clipboard";
-        echo "$host_pass" | pbcopy;
+        echo "$host_stage_pass SSH password on clipboard";
+        echo "$host_stage_pass" | pbcopy;
 
         # download database dump
-        ssh "$host_user"@"$host_name" "mysqldump -h$db_host -u$db_user -p$db_pass $db_name" | pv | cat - > $file_dump;
+        ssh "$host_stage_user"@"$host_stage_name" "mysqldump -h$db_stage_host -u$db_stage_user -p$db_stage_pass $db_stage_name" | pv | cat - > $file_dump;
 
         # if the dump file now exists
         if [ -f $file_dump ]; then

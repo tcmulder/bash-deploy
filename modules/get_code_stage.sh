@@ -11,7 +11,7 @@
 
 # output help if requested
 if [ $1 == 'help' ]; then
-    echo "zen get code org ............. Download stage code backup";
+    echo "zen get code stage ........... Download stage code backup";
     exit;
 fi
 
@@ -52,7 +52,7 @@ source $1;
 
 # establish desired output filename
 dir_for_tar="$dir_backup"
-file_tar="$dir_for_tar""org_code.tar.gz";
+file_tar="$dir_for_tar""stage_code.tar.gz";
 
 # if the tar file doesn't already exist
 if [ ! -f $file_tar ]; then
