@@ -9,8 +9,8 @@
 # -----------------------------------------------------------------
 
 # client and project name as used for their directories
-# name_client='PROJECT';
-# name_project='PROJECT';
+# name_client='__PROJECT_NAME__';
+# name_project='__PROJECT_NAME__';
 
 # directory where zen deploy resides
 dir_script="/Applications/MAMP/htdocs/zen-deploy";
@@ -25,7 +25,7 @@ config_file="${BASH_SOURCE[@]}";
 dir_backup=$dir_config'/'`date +"%y.%m.%d"`'_'$name_project'/';
 
 # live server directories
-# root_remote='/YOUR_SERVER_ADDRESS/zen_stage1/sites/PROJECT/'; # start and end with forward slash
+# root_remote='/YOUR_SERVER_ADDRESS/zen_stage1/sites/__PROJECT_NAME__/'; # start and end with forward slash
 # dir_remote='html'; # single directory name with no slashes
 
 # stage server directories
@@ -51,8 +51,8 @@ host_stage_pass='YOUR_PASSWORD';
 # -----------------------------------------------------------------
 
 # live database credentials
-# db_name='wp_PROJECT';
-# db_user='wp_PROJECT';
+# db_name='wp___PROJECT_NAME__';
+# db_user='wp___PROJECT_NAME__';
 # db_pass='000000';
 # db_host='localhost';
 db_table_prefix='wp_';
@@ -66,7 +66,7 @@ db_stage_table_prefix='wp_';
 
 # find and replace urls
 url_stage='http://YOUR_SERVER_ADDRESS/sites/'$name_client'/'$name_project;
-# url='http://www.PROJECT.com';
+# url='http://www.__PROJECT_NAME__.com';
 
 # -----------------------------------------------------------------
 # Common functions
