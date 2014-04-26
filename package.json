@@ -17,3 +17,35 @@
   "author": "tcmulder",
   "license": "MIT"
 }
+
+
+{
+  "name": "zen-deploy",
+  "version": "0.0.1",
+  "description": "A zenman deployment tool.",
+  "license": "MIT",
+  "homepage": "http://zenman.com",
+  "author": {
+    "name": "Tomas Mulder",
+    "email": "tomas@zenman.com",
+    "url": "http://www.tcmulder.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.zenman.com:tcmulder/zen-grunt#node"
+  },
+  "keywords": [
+    "deployment",
+    "zenman"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gulp-shell": "^0.2.4"
+  }
+}
