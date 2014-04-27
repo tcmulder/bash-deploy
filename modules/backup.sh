@@ -25,6 +25,7 @@ if [ $1 == 'doctor' ]; then
 	source $2;
 	# tell the user the check is taking place
     big_echo 'Checking Backup Directory';
+    echo '(backup.sh)';
 
     # if the backup directory exists
     if [ -d $dir_backup ]; then
