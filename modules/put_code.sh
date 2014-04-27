@@ -11,7 +11,7 @@
 
 # output help if requested
 if [ $1 == 'help' ]; then
-    echo "zen put code ................. Put live_code.tar.gz code on remote";
+    echo "zen put code ................. Put project code on remote via rsync";
     exit;
 fi
 
@@ -30,13 +30,18 @@ if [ $1 == 'doctor' ]; then
     echo "$host_pass SSH password on clipboard";
     echo "$host_pass" | pbcopy;
 
-    # if the remote directory exists
-    if [[ `ssh "$host_user"@"$host_name" test -d $root_remote$dir_remote && echo exists` ]]; then
+    # check the server for directory existence and rsync installation
+    server_check=`ssh "$host_user"@"$host_name" test -d $root_remote$dir_remote &&  rsync --version | grep -q 'rsync  version' && echo good`;
+
+    # if the server is good
+    if [[ $server_check == 'good' ]]; then
         # report success
-        alert_success "The $root_remote$dir_remote directory exists";
+        alert_success "The $root_remote$dir_remote directory exists and rsync is installed";
     else
+        # report the errors
+        echo $server_check;
         # report failure
-        alert_error "The $root_remote$dir_remote directory does not exist";
+        alert_error "The $root_remote$dir_remote directory does not exist or rsync isn't installed";
     fi
 
     exit;
@@ -51,32 +56,49 @@ fi
 source $1;
 
 # establish desired output filename
-dir_with_tar="$dir_backup"
-file_tar="$dir_with_tar""live_code.tar.gz";
+dir_with_local_code="$dir_config""/"
+local_code="$dir_with_local_code""$name_project""/";
 
-# if the tar file exists
-if [ -f $file_tar ]; then
-
-    # copy ssh password to clipboard
-    echo "$host_pass SSH password on clipboard";
-    echo "$host_pass" | pbcopy;
-
-    # upload the code
-    remote_commands="cd $root_remote && cat - > live_code.tar.gz";
-    cat $file_tar | pv | ssh "$host_user"@"$host_name" "$remote_commands";
+# if the code directory exists
+if [ -d $local_code ]; then
 
     # copy ssh password to clipboard
     echo "$host_pass SSH password on clipboard";
     echo "$host_pass" | pbcopy;
 
-    # reconnect via ssh and cd into directory with the upload
-    remote_commands="cd $root_remote && echo 'Logged into directory `pwd`' && ls && bash";
-    ssh -t "$host_user"@"$host_name" "$remote_commands";
+    # set up rsync call
+    rsync_short_options='-azcv';
+    rsync_long_options='--progress --delete';
+    rsync_exclude='--exclude-from="'"$local_code"'.gitignore"';
 
-# if the tar file already exists
+    # dry run the rsync
+    eval "rsync $rsync_short_options""n"" $rsync_long_options $rsync_exclude $local_code $host_user@$host_name:$root_remote$dir_remote";
+    echo "Dry run called";
+
+    # ask if the rsync should be run (defaults to no)
+    read -p "Put the code? (no) " confirm
+    confirm=${confirm:-no}
+
+    # if the rsync should be run
+    if [ $confirm == 'yes' ]; then
+
+        # run the rsync
+        eval "rsync $rsync_short_options $rsync_long_options $rsync_exclude $local_code $host_user@$host_name:$root_remote$dir_remote";
+
+        # signify success of call to rsync
+        alert_success "The rsync command was called";
+
+    # if the rsync shouldn't be run then exit
+    else
+
+        alert_exit 'Unsuccessful put code command';
+
+    fi
+
+# if the code directory doesn't exist
 else
     # exit with error
-    alert_exit "The tar file does not exist $file_tar";
+    alert_exit "The code directory does not exist $local_code";
 
 fi
 
