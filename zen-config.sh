@@ -2,6 +2,7 @@
 
 # #################################################################
 # Zen Deploy Script
+# -----------------
 # version:      3.0
 # author:       Tomas Mulder <tomas@zenman.com>
 # repo:         git@git.zenman.com:tcmulder/zen-deploy.git

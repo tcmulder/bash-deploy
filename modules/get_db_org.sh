@@ -25,7 +25,7 @@ if [ $1 == 'doctor' ]; then
 	# source the configuration file
 	source $2;
 	# tell the user the check is taking place
-    big_echo "Checking remote $db_name Database";
+    big_echo "Checking remote \"$db_name\" Database";
 
     # copy the ssh password
     echo "$host_pass SSH password on clipboard";

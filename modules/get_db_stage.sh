@@ -22,12 +22,10 @@ fi
 
 # if diagnostics were requested
 if [ $1 == 'doctor' ]; then
-
     # source the configuration file
     source $2;
-
     # tell the user the check is taking place
-    big_echo "Checking remote $db_stage_name Database";
+    big_echo "Checking stage \"$db_stage_name\" Database";
 
     # copy the ssh password
     echo "$host_stage_pass SSH password on clipboard";

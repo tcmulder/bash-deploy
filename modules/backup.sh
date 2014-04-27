@@ -24,7 +24,7 @@ if [ $1 == 'doctor' ]; then
 	# source the configuration file
 	source $2;
 	# tell the user the check is taking place
-    big_echo 'Checking Backup Directory';
+    big_echo "Checking \"$(basename $dir_backup)\" Backup Directory";
     echo '(backup.sh)';
 
     # if the backup directory exists

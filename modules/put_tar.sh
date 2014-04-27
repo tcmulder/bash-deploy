@@ -24,7 +24,7 @@ if [ $1 == 'doctor' ]; then
     # source the configuration file
     source $2;
     # tell the user the check is taking place
-    big_echo "Checking Directory for tar on $host_name";
+    big_echo "Checking Directory for tar on \"$host_name\"";
 
     # copy ssh password
     echo "$host_pass SSH password on clipboard";

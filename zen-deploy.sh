@@ -2,6 +2,7 @@
 
 # #################################################################
 # Zen Deploy Script
+# -----------------
 # version:      3.0
 # author:       Tomas Mulder <tomas@zenman.com>
 # repo:         git@git.zenman.com:tcmulder/zen-deploy.git
@@ -13,10 +14,16 @@
 
 # easy big echos
 function big_echo(){
+    # make a echo bar the length of the echo
+    echo_bar='---';
+    for((i=0; i < ${#1}; i++)); do
+      echo_bar=$echo_bar"-";
+    done
+    # output big echo
     echo
-    echo '----------------------------------------';
-    echo "// $1";
-    echo '----------------------------------------';
+    echo "$echo_bar";
+    echo ":: $1";
+    echo "$echo_bar";
 }
 
 # display colorized output

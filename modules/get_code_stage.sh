@@ -24,7 +24,7 @@ if [ $1 == 'doctor' ]; then
     # source the configuration file
     source $2;
     # tell the user the check is taking place
-    big_echo "Checking $dir_stage Directory";
+    big_echo "Checking \"$dir_stage\" Directory on \"$host_stage_name\"";
 
     # copy ssh password
     echo "$host_stage_pass SSH password on clipboard";
