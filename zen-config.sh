@@ -1,7 +1,10 @@
 #!/bin/sh
 
 # #################################################################
-# Establish Project Variables
+# Zen Deploy Script
+# version:      3.0
+# author:       Tomas Mulder <tomas@zenman.com>
+# repo:         git@git.zenman.com:tcmulder/zen-deploy.git
 # #################################################################
 
 # -----------------------------------------------------------------
@@ -69,28 +72,7 @@ url_stage='http://YOUR_SERVER_ADDRESS/sites/'$name_client'/'$name_project;
 # url='http://www.__PROJECT_NAME__.com';
 
 # -----------------------------------------------------------------
-# Common functions
+# Call zen deployment script
 # -----------------------------------------------------------------
 
-# grab common functions
-source $dir_script/functions.sh
-
-# -----------------------------------------------------------------
-# Main zen deploy function
-# -----------------------------------------------------------------
-
-function zen(){
-    # grab all user the commands
-    cmd="$@";
-    # set up the filename of the command
-    cmd_file=$dir_script"/modules/"${cmd// /_}".sh";
-    # if the command file actually exists
-    if [ -f $cmd_file ]; then
-        # run the command file
-        bash $cmd_file $dir_config"/"$config_file;
-    # if the command file doesn't exist
-    else
-        # tell the user
-        echo "$@ command not found"
-    fi
-}
+source $dir_script/zen-deploy.sh

@@ -1,7 +1,10 @@
 #!/bin/sh
 
 # #################################################################
-# Common Functions
+# Zen Deploy Script
+# version:      3.0
+# author:       Tomas Mulder <tomas@zenman.com>
+# repo:         git@git.zenman.com:tcmulder/zen-deploy.git
 # #################################################################
 
 # -----------------------------------------------------------------
@@ -60,7 +63,7 @@ function zen(){
         # if the sub command file does not exist
         else
             # tell the user
-            echo "No help for $sub_cmd found";
+            alert_error "No help for $sub_cmd found";
         fi
     # if the command asks for diagnosis
     elif [ $cmd_first == 'doctor' ]; then
@@ -75,11 +78,11 @@ function zen(){
         # if the sub command file does not exist
         else
             # tell the user
-            echo "No diagnostics for $sub_cmd found";
+            alert_error "No diagnostics for $sub_cmd found";
         fi
     # if the command file doesn't exist
     else
         # tell the user
-        echo "$@ command not found";
+        alert_error "$cmd command not found";
     fi
 }
