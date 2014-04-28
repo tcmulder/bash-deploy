@@ -9,7 +9,7 @@
 # Output help info
 # -----------------------------------------------------------------
 
-# if diagnostics were requested
+# output help if requested
 if [ $1 == 'help' ]; then
 	echo "zen doctor ................... Check configuration";
 	exit;
@@ -35,7 +35,8 @@ source $1;
 for module in $dir_script/modules/*
 do
 	# call for diagnosis and pass in the configuration file
-	bash $module 'doctor' $1;
+    bash $module 'doctor' $1;
+    echo "file: $(basename $module)";
 done
 
 exit;

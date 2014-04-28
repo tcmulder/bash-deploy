@@ -25,7 +25,7 @@ if [ $1 == 'doctor' ]; then
 	source $2;
 
 	# tell the user the check is taking place
-    big_echo "Checking $host_name SSH Connection";
+    big_echo "Checking SSH for \"$host_name\"";
 
     # copy ssh password to clipboard
     echo "$host_pass SSH password on clipboard";
