@@ -63,7 +63,7 @@ if [ -f $file_tar ]; then
 
     # upload the code
     remote_commands="cd $root_remote && cat - > live_code.tar.gz";
-    cat $file_tar | pv | ssh "$host_user"@"$host_name" "$remote_commands";
+    cat $file_tar | pv -Wbt | ssh "$host_user"@"$host_name" "$remote_commands";
 
     # copy ssh password to clipboard
     echo "$host_pass SSH password on clipboard";

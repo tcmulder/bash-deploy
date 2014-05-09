@@ -65,7 +65,7 @@ if [ ! -f $file_tar ]; then
         echo "$host_stage_pass" | pbcopy;
 
         # tar and download the code
-        ssh "$host_stage_user"@"$host_stage_name" "cd $root_stage/; tar -pzcf - $dir_stage;" | pv | cat - > "$file_tar";
+        ssh "$host_stage_user"@"$host_stage_name" "cd $root_stage/; tar -pzcf - $dir_stage;" | pv -Wbt | cat - > "$file_tar";
 
         # if the tar file now exists
         if [ -f $file_tar ]; then

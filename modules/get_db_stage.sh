@@ -90,7 +90,7 @@ if [ ! -f $file_dump ]; then
         echo "$host_stage_pass" | pbcopy;
 
         # download database dump
-        ssh "$host_stage_user"@"$host_stage_name" "mysqldump -h$db_stage_host -u$db_stage_user -p$db_stage_pass $db_stage_name" | pv | cat - > $file_dump;
+        ssh "$host_stage_user"@"$host_stage_name" "mysqldump -h$db_stage_host -u$db_stage_user -p$db_stage_pass $db_stage_name" | pv -Wbt | cat - > $file_dump;
 
         # if the dump file now exists
         if [ -f $file_dump ]; then

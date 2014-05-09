@@ -65,7 +65,7 @@ if [ ! -f $file_tar ]; then
         echo "$host_pass" | pbcopy;
 
         # tar and download the code
-        ssh "$host_user"@"$host_name" "cd $root_remote/; tar -pzcf - $dir_remote;" | pv | cat - > "$file_tar";
+        ssh "$host_user"@"$host_name" "cd $root_remote/; tar -pzcf - $dir_remote;" | pv -Wbt | cat - > "$file_tar";
 
         # if the tar file now exists
         if [ -f $file_tar ]; then
