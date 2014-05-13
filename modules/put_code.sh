@@ -76,7 +76,7 @@ if [ -d $local_code ]; then
     echo "Dry run called";
 
     # ask if the rsync should be run (defaults to no)
-    read -p "Put the code? (no) " confirm
+    read -p "Put the code? [yes|NO] " confirm
     confirm=${confirm:-no}
 
     # if the rsync should be run
