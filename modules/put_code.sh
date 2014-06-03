@@ -67,7 +67,7 @@ if [ -d $local_code ]; then
     echo "$host_pass" | pbcopy;
 
     # set up rsync call
-    rsync_short_options='-azcv';
+    rsync_short_options='-azcvi';
     rsync_long_options='--progress --delete';
     rsync_exclude='--exclude-from="'"$local_code"'.gitignore"';
 
