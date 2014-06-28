@@ -16,8 +16,11 @@ function zen(){
     cmd_first=`echo "$@" | awk '{print $1;}'`;
     # store the file path
     cmd_file=$dir_script"/modules/"${cmd// /_}".sh";
+    # if the root command was called
+    if [ -z $cmd_first ]; then
+        echo 'No command recieved: run zen help for assistance'
     # if the command file actually exists
-    if [ -f $cmd_file ]; then
+    elif [ -f $cmd_file ]; then
         # run the command file
         bash $cmd_file $dir_config"/"$config_file;
     # if command asks for help

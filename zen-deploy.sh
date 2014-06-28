@@ -16,7 +16,8 @@
 source "$dir_script"/app/comments.sh;
 
 # check for updates
-source "$dir_script"/app/update.sh;
+# source "$dir_script"/app/update.sh;
 
 # main zen script
 source "$dir_script"/app/zen.sh;
+

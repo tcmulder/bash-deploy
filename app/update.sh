@@ -10,7 +10,7 @@
 # -----------------------------------------------------------------
 
 # if the zen function hasn't been initialized yet
-if [ "`type -t zen`" != 'function' ]; then
+# if [ "`type -t zen`" != 'function' ]; then
     # set up git command in appropriate directory
     git="git --git-dir=$dir_script/.git --work-tree=$dir_script";
     # determine which branch is in use
@@ -37,4 +37,4 @@ if [ "`type -t zen`" != 'function' ]; then
             fi
         fi
     fi
-fi
+# fi

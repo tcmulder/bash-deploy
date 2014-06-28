@@ -50,13 +50,19 @@ fi
 # source the configuration file
 source $1;
 
-# copy ssh password to clipboard
-echo "$host_pass SSH password on clipboard";
-echo "$host_pass" | pbcopy;
+echo $db_stage_name;
+echo "not found, right?";
 
-# upload the code
-remote_commands="find -L / -name 'wp-config.php' 2>/dev/null";
-wp_config=`ssh "$host_user"@"$host_name" "$remote_commands"`;
-echo "$wp_config";
+find -L . -name 'wp-config.php' -type f 2>/dev/null
+# find -L . -name 'wp-config.php' -type d 2>/dev/null
+
+# # copy ssh password to clipboard
+# echo "$host_pass SSH password on clipboard";
+# echo "$host_pass" | pbcopy;
+
+# # upload the code
+# remote_commands="find -L / -name 'wp-config.php' 2>/dev/null";
+# wp_config=`ssh "$host_user"@"$host_name" "$remote_commands"`;
+# echo "$wp_config";
 
 exit;
