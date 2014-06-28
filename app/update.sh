@@ -11,18 +11,16 @@
 
 # if the zen function hasn't been initialized yet
 if [ "`type -t zen`" != 'function' ]; then
-
     # set up git command in appropriate directory
-    git="git --git-dir="$dir_script"/.git";
-
+    git="git --git-dir=$dir_script/.git --work-tree=$dir_script";
+    # determine which branch is in use
+    branch="`$git rev-parse --abbrev-ref HEAD`";
     # if the working directory isn't clean
-    if [ "`$git status`" != *"working directory clean"* ]; then
+    if [ "`$git status --porcelain`" != '' ]; then
         # tell the user
         echo 'The working directory is unclean, which could cause problems.'
         alert_error "Unclean git directory $dir_script";
     else
-        # determine which branch is in use
-        branch="`$git rev-parse --abbrev-ref HEAD`";
         # get the local and remote sha
         local_commit="`$git rev-parse $branch`"
         remote_commit="`$git rev-parse origin/$branch`"
@@ -36,7 +34,7 @@ if [ "`type -t zen`" != 'function' ]; then
             # if the answer is yes
             if [ "$confirm" == 'yes' ]; then
                 # pull down changes
-                $git pull origin/$branch;
+                $git pull origin $branch;
             fi
 
         fi
