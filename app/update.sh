@@ -16,7 +16,7 @@ if [ "`type -t zen`" != 'function' ]; then
     git="git --git-dir="$dir_script"/.git";
 
     # if the working directory isn't clean
-    if [ "`$git status`" != *"working directory clean"* ]; then
+    if [[ `$git status` != *"working directory clean"* ]]; then
         # tell the user
         echo 'The working directory is unclean, which could cause problems.'
         alert_error "Unclean git directory $dir_script";
