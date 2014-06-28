@@ -27,7 +27,7 @@
         # if the local sha and remote sha are not the same
         if [ $local_commit != $remote_commit ]; then
             # ask the user if they'd like to update
-            echo "zen-deploy is out of date.";
+            echo 'zen-deploy is out of date.';
             read -p "Would you like to update? [YES|no] " confirm;
             confirm=${confirm:-yes};
             # if the answer is yes
@@ -35,6 +35,10 @@
                 # pull down changes
                 $git pull origin $branch;
             fi
+        # if the local sha and remote sha match
+        else
+            # tell the user everything's up to date
+            echo 'The zen-deploy script is up to date'
         fi
     fi
 # fi
