@@ -16,17 +16,16 @@ if [ "`type -t zen`" != 'function' ]; then
     # determine which branch is in use
     branch="`$git rev-parse --abbrev-ref HEAD`";
     # if the working directory isn't clean
-    if [ "`$git status --porcelain`" != '' ]; then
+    if [ "`$git status --porcelain`" == '' ]; then
         # tell the user
         echo 'The working directory is unclean, which could cause problems.'
         alert_error "Unclean git directory $dir_script";
     else
         # get the local and remote sha
-        local_commit="`$git rev-parse $branch`"
-        remote_commit="`$git rev-parse origin/$branch`"
-
+        local_commit="`$git rev-parse $branch`";
+        remote_commit="`$git rev-parse origin/$branch`";
         # if the local sha and remote sha are not the same
-        if [ local_commit != remote_commit ]; then
+        if [ $local_commit != $remote_commit ]; then
             # ask the user if they'd like to update
             echo "zen-deploy is out of date.";
             read -p "Would you like to update? [YES|no] " confirm;
@@ -36,8 +35,6 @@ if [ "`type -t zen`" != 'function' ]; then
                 # pull down changes
                 $git pull origin $branch;
             fi
-
         fi
     fi
-
 fi
