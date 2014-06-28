@@ -17,7 +17,7 @@
 
 # output help if requested
 if [ -n "$1" ] && [ "$1" == 'help' ]; then
-    echo "zen init ..................... initialize/reinitialize zen-deploy";
+    echo "zen init ..................... initialize zen-deploy";
     exit;
 fi
 
@@ -109,3 +109,13 @@ function zen() {
         fi
     fi
 }
+
+# if zen-deploy was previously initialized
+if [ -n "$1" ]; then
+    # source the configuration file
+    source $1;
+
+    # reinitialize
+    alert_error "The zen-deploy script is already initialized";
+
+fi
