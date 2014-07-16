@@ -32,7 +32,7 @@ if [ $1 == 'doctor' ]; then
     echo "$host_pass" | pbcopy;
 
     # connect to the remote database and list tables
-    ssh_return=`ssh "$host_user"@"$host_name" "mysql -h$db_host -u$db_user -p$db_pass $db_name -e 'SHOW TABLES'"`;
+    ssh_return=`ssh "$host_user"@"$host_name" "mysql -h'$db_host' -u'$db_user' -p'$db_pass' '$db_name' -e 'SHOW TABLES'"`;
 
     # if the list of tables is empty
     if [ ${#ssh_return} == 0 ]; then
@@ -72,7 +72,7 @@ if [ -f $file_dump ]; then
     echo "$host_pass" | pbcopy;
 
     # drop the database
-    ssh "$host_user"@"$host_name" "mysqldump -h$db_host -u$db_user -p$db_pass $db_name | grep ^DROP | mysql -h$db_host -u$db_user -p$db_pass $db_name";
+    ssh "$host_user"@"$host_name" "mysqldump -h'$db_host' -u'$db_user' -p'$db_pass' '$db_name' | grep ^DROP | mysql -h'$db_host' -u'$db_user' -p'$db_pass' '$db_name'";
 
     # tell the user we're uploading the database
     echo "Uploading live_db.sql to remote database";
@@ -82,7 +82,7 @@ if [ -f $file_dump ]; then
     echo "$host_pass" | pbcopy;
 
     # cat the database file and push it live
-    cat $file_dump | ssh "$host_user"@"$host_name" "cat - | mysql -h$db_host -u$db_user -p$db_pass $db_name";
+    cat $file_dump | ssh "$host_user"@"$host_name" "cat - | mysql -h'$db_host' -u'$db_user' -p'$db_pass' '$db_name'";
 
     # tell the user we're checking the url
     echo "Checking siteurl for uploaded database";
@@ -92,7 +92,7 @@ if [ -f $file_dump ]; then
     echo "$host_pass" | pbcopy;
 
     # get the siteurl value
-    option_value=`ssh "$host_user"@"$host_name" "mysql -h$db_host -u$db_user -p$db_pass $db_name -e 'SELECT option_value FROM "$db_table_prefix"options WHERE option_name=\"siteurl\"'"`;
+    option_value=`ssh "$host_user"@"$host_name" "mysql -h'$db_host' -u'$db_user' -p'$db_pass' '$db_name' -e 'SELECT option_value FROM "$db_table_prefix"options WHERE option_name=\"siteurl\"'"`;
     option_value_array=($option_value);
     siteurl=${option_value_array[1]};
 

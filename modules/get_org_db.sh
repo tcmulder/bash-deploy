@@ -32,7 +32,7 @@ if [ $1 == 'doctor' ]; then
     echo "$host_pass" | pbcopy;
 
 	# connect to the remote database and list tables
-    ssh_return=`ssh "$host_user"@"$host_name" "mysql -h$db_host -u$db_user -p$db_pass $db_name -e 'SHOW TABLES'"`;
+    ssh_return=`ssh "$host_user"@"$host_name" "mysql -h'$db_host' -u'$db_user' -p'$db_pass' '$db_name' -e 'SHOW TABLES'"`;
 
     # if the list of tables is empty
     if [ ${#ssh_return} == 0 ]; then
@@ -73,7 +73,7 @@ if [ ! -f $file_dump ]; then
         echo "$host_pass" | pbcopy;
 
         # download database dump
-        ssh "$host_user"@"$host_name" "mysqldump -h$db_host -u$db_user -p$db_pass $db_name" | pv -Wbt | cat - > $file_dump;
+        ssh "$host_user"@"$host_name" "mysqldump -h'$db_host' -u'$db_user' -p'$db_pass' '$db_name'" | pv -Wbt | cat - > $file_dump;
 
         # if the dump file now exists
         if [ -f $file_dump ]; then
