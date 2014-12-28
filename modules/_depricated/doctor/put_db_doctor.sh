@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # #################################################################
 # Get Database
-# dumps a database and saves it under a given file name
+# -----------------------------------------------------------------
+# description: dumps a database and saves it under a given file name
+# since version: 3.0
 # #################################################################
 
 

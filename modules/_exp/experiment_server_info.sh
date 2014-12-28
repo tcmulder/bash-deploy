@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # #################################################################
 # Put Code
@@ -44,40 +44,19 @@ if [ $1 == 'doctor' ]; then
 fi
 
 # -----------------------------------------------------------------
-# Put code on remote server
+# Get server information
 # -----------------------------------------------------------------
 
 # source the configuration file
 source $1;
 
-# establish desired output filename
-dir_with_tar="$dir_backup"
-file_tar="$dir_with_tar""live_code.tar.gz";
+# copy ssh password to clipboard
+echo "$host_pass SSH password on clipboard";
+echo "$host_pass" | pbcopy;
 
-# if the tar file exists
-if [ -f $file_tar ]; then
-
-    # copy ssh password to clipboard
-    echo "$host_pass SSH password on clipboard";
-    echo "$host_pass" | pbcopy;
-
-    # upload the code
-    remote_commands="cd $root_remote && cat - > live_code.tar.gz";
-    cat $file_tar | pv -Wbt | ssh "$host_user"@"$host_name" "$remote_commands";
-
-    # copy ssh password to clipboard
-    echo "$host_pass SSH password on clipboard";
-    echo "$host_pass" | pbcopy;
-
-    # reconnect via ssh and cd into directory with the upload
-    remote_commands="cd $root_remote && echo 'Logged into directory `pwd`' && ls && bash";
-    ssh -t "$host_user"@"$host_name" "$remote_commands";
-
-# if the tar file already exists
-else
-    # exit with error
-    alert_exit "The tar file does not exist $file_tar";
-
-fi
+# upload the code
+remote_commands="find -L / -name 'wp-config.php' 2>/dev/null";
+wp_config=`ssh "$host_user"@"$host_name" "$remote_commands"`;
+echo "$wp_config";
 
 exit;

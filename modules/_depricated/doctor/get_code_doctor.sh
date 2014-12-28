@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # #################################################################
 # Get Code
-# grabs code from the server and saves a backup
+# -----------------------------------------------------------------
+# description: grabs code from the server and saves a backup
+# since version: 3.0
 # #################################################################
 
 # -----------------------------------------------------------------
@@ -11,7 +13,7 @@
 
 # output help if requested
 if [ $1 == 'help' ]; then
-    echo "zen get code new ............. Download new code backup";
+    echo "zen get code org ............. Download original code backup";
     exit;
 fi
 
@@ -51,8 +53,8 @@ fi
 source $1;
 
 # establish desired output filename
-dir_for_tar="$dir_backup""new/code/"
-file_tar="$dir_for_tar""new_code.tar.gz";
+dir_for_tar="$dir_backup""org/code/"
+file_tar="$dir_for_tar""org_code.tar.gz";
 
 # if the tar file doesn't already exist
 if [ ! -f $file_tar ]; then

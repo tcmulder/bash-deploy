@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # #################################################################
 # Zen Function
-# main zen function
+# -----------------------------------------------------------------
+# description: main zen function
+# since version: 4.0
 # #################################################################
 
 # -----------------------------------------------------------------
@@ -14,45 +16,20 @@ function zen(){
     cmd="$@";
     # get the first command
     cmd_first=`echo "$@" | awk '{print $1;}'`;
+    # get the command before any options
+    cmd_before_opts="${cmd%% -*}";
+    # replace spaces in pre-option command
+    cmd_no_spaces="${cmd_before_opts// /_}";
     # store the file path
-    cmd_file=$dir_script"/modules/"${cmd// /_}".sh";
+    cmd_file=$dir_script"/modules/"$cmd_no_spaces"/module.sh";
     # if the root command was called
-    if [ -z $cmd_first ]; then
-        echo 'No command recieved: run zen help for assistance'
+    if [ -z $cmd_first ] ||  [ $cmd_first == '-h' ]; then
+        # just show the manual and exit
+        man "$( dirname "${BASH_SOURCE[0]}" )"/man.1.sh;
     # if the command file actually exists
     elif [ -f $cmd_file ]; then
         # run the command file
-        bash $cmd_file $dir_config"/"$config_file;
-    # if command asks for help
-    elif [ $cmd_first == 'help' ]; then
-        # get the command minus "help"
-        sub_cmd=`echo $cmd | sed -E 's/^.{5}//'`;
-        # establish the file to check help for
-        cmd_file=$dir_script"/modules/"${sub_cmd// /_}".sh";
-        # if the sub command file exists
-        if [ -f $cmd_file ]; then
-            # check help
-            bash $cmd_file 'help';
-        # if the sub command file does not exist
-        else
-            # tell the user
-            alert_error "No help for $sub_cmd found";
-        fi
-    # if the command asks for diagnosis
-    elif [ $cmd_first == 'doctor' ]; then
-        # get the command minus "doctor"
-        sub_cmd=`echo $cmd | sed -E 's/^.{7}//'`;
-        # establish the file to diagnose
-        cmd_file=$dir_script"/modules/"${sub_cmd// /_}".sh";
-        # if the sub command file exists
-        if [ -f $cmd_file ]; then
-            # run diagnostics
-            bash $cmd_file 'doctor' $config_file;
-        # if the sub command file does not exist
-        else
-            # tell the user
-            alert_error "No diagnostics for $sub_cmd found";
-        fi
+        bash $cmd_file $cmd -q$dir_config"/"$config_file;
     # if the command file doesn't exist
     else
         # tell the user

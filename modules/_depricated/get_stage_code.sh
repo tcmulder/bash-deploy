@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # #################################################################
 # Get Code
-# grabs code from the server and saves a backup
+# -----------------------------------------------------------------
+# description: grabs code from the server and saves a backup
+# since version: 3.0
 # #################################################################
 
 # -----------------------------------------------------------------
@@ -11,7 +13,7 @@
 
 # output help if requested
 if [ $1 == 'help' ]; then
-    echo "zen get code org ............. Download original code backup";
+    echo "zen get code stage ........... Download stage code backup";
     exit;
 fi
 
@@ -24,19 +26,19 @@ if [ $1 == 'doctor' ]; then
     # source the configuration file
     source $2;
     # tell the user the check is taking place
-    big_echo "Checking \"$dir_remote\" Directory on \"$host_name\"";
+    big_echo "Checking \"$dir_stage\" Directory on \"$host_stage_name\"";
 
     # copy ssh password
-    echo "$host_pass SSH password on clipboard";
-    echo "$host_pass" | pbcopy;
+    echo "$host_stage_pass SSH password on clipboard";
+    echo "$host_stage_pass" | pbcopy;
 
-    # if the remote directory exists
-    if [[ `ssh "$host_user"@"$host_name" test -d $root_remote$dir_remote && echo exists` ]]; then
+    # if the stage directory exists
+    if [[ `ssh "$host_stage_user"@"$host_stage_name" test -d $root_stage$dir_stage && echo exists` ]]; then
         # report success
-        alert_success "The $root_remote$dir_remote directory exists";
+        alert_success "The $root_stage$dir_stage directory exists";
     else
         # report failure
-        alert_error "The $root_remote$dir_remote directory does not exist";
+        alert_error "The $root_stage$dir_stage directory does not exist";
     fi
 
     exit;
@@ -51,8 +53,8 @@ fi
 source $1;
 
 # establish desired output filename
-dir_for_tar="$dir_backup""org/code/"
-file_tar="$dir_for_tar""org_code.tar.gz";
+dir_for_tar="$dir_backup"
+file_tar="$dir_for_tar""stage_code.tar.gz";
 
 # if the tar file doesn't already exist
 if [ ! -f $file_tar ]; then
@@ -61,11 +63,11 @@ if [ ! -f $file_tar ]; then
     if [ -d $dir_for_tar ]; then
 
         # copy ssh password to clipboard
-        echo "$host_pass SSH password on clipboard";
-        echo "$host_pass" | pbcopy;
+        echo "$host_stage_pass SSH password on clipboard";
+        echo "$host_stage_pass" | pbcopy;
 
         # tar and download the code
-        ssh "$host_user"@"$host_name" "cd $root_remote/; tar -pzcf - $dir_remote;" | pv -Wbt | cat - > "$file_tar";
+        ssh "$host_stage_user"@"$host_stage_name" "cd $root_stage/; tar -pzcf - $dir_stage;" | pv -Wbt | cat - > "$file_tar";
 
         # if the tar file now exists
         if [ -f $file_tar ]; then

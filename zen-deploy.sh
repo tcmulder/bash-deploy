@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 # #################################################################
 # Zen Deploy Script
 # -----------------
-# version:      3.0
+# version:      4.0
 # author:       Tomas Mulder <tomas@zenman.com>
 # repo:         git@git.zenman.com:tcmulder/zen-deploy.git
 # #################################################################
@@ -12,8 +12,8 @@
 # Source required functions
 # -----------------------------------------------------------------
 
-# handle comments
-source "$dir_script"/app/comments.sh;
+# establish common functions
+source "$dir_script"/app/common_functions.sh;
 
 # check for updates
 # source "$dir_script"/app/update.sh;

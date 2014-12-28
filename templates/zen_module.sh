@@ -1,54 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 
 # #################################################################
-# SSH Into Remote Server
-# Connects to server via SSH
+# Title Case Module Title
+# -----------------------------------------------------------------
+# description: lowercase what the module does
+# since version: 0.0
 # #################################################################
 
-# -----------------------------------------------------------------
-# Output help info
-# -----------------------------------------------------------------
+# module function
+function module(){
 
-# output help if requested
-if [ $1 == 'help' ]; then
-    echo ".....................................................";
-	exit;
-fi
+    # source the configuration file
+    source "$config_file";
 
-# -----------------------------------------------------------------
-# Perform doctor diagnosis
-# -----------------------------------------------------------------
+    # module code goes here (don't forget to add tests to doctor if appropriate)
 
-# if diagnostics were requested
-if [ $1 == 'doctor' ]; then
-	# source the configuration file
-	source $2;
+}
 
-	# tell the user the check is taking place
-    big_echo "Checking for \"$some_variable\"";
-
-    # diagnostic code here
-
-    # if success
-    if [ "$some_variable" == "$confirm" ]; then
-        # show the success message
-        alert_success "$success";
-    # if the returned message doesn't confirm success
-    else
-        # show the error to the user
-        alert_error "Error with $some_variable";
-    fi
-
- 	exit;
-fi
-
-# -----------------------------------------------------------------
-# Actual module commands
-# -----------------------------------------------------------------
-
-# source the configuration file
-source $1;
-
-# command text here
-
+# make all common functions available
+source "$( dirname "${BASH_SOURCE[0]}" )""/../../app/common_functions.sh";
+# prep and fire this module (pass all args and this file's path)
+run_module "$@" "$( dirname "${BASH_SOURCE[0]}" )";
+# all done here
 exit;

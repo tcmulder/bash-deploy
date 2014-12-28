@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # #################################################################
 # Init
-# initialize zen-deploy script
+# -----------------------------------------------------------------
+# description: initialize zen-deploy script
+# since version: 4.0
 # #################################################################
 
 # Instructions: you'll need to add the following line to your

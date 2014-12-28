@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # #################################################################
 # Doctor
-# Checks if there are any issues with the config.sh variables
+# -----------------------------------------------------------------
+# description: checks if there are any issues with the config.sh variables
+# since version: 3.0
 # #################################################################
 
 # -----------------------------------------------------------------
