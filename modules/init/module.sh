@@ -73,8 +73,6 @@ function zen() {
             echo "Initializing zen-deploy using ${zen_co[0]}";
             # source the file
             source ${zen_co[0]};
-            # check for updates
-            source $dir_script/app/update.sh;
         # if there are more than one file
         else
             # for each file
@@ -90,8 +88,6 @@ function zen() {
                     echo "Initializing zen-deploy using $zen_co_file";
                     # source the file
                     source $zen_co_file;
-                    # check for updates
-                    source $dir_script/app/update.sh;
                     # exit the loop
                     break;
                 fi
