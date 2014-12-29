@@ -111,10 +111,21 @@ function ar_var_check {
     # if there are any missing variables in the configuration
     if [[ $miss != '' ]]; then
         # alert the user what variables were missing
-        alert_error "The server is not configured for this test: missing $miss";
+        alert_error "The server is not fully configured: missing $miss";
     # if all the variables are set then report all set for testing
     else
         echo 'set';
+    fi
+}
+
+function ar_var_check_exit {
+    # check if configuration is set
+    var_check=`ar_var_check "$1"`;
+    # if all configuration is set
+    if [[ $var_check != 'set' ]]; then
+        # skip this test and alert missing items
+        echo $var_check;
+        exit;
     fi
 }
 
