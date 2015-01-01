@@ -13,8 +13,8 @@ function module(){
     # source the configuration file
     source "$config_file";
 
-    # check the server is configured
-    ar_var_check_exit 'host_pass host_name host_user';
+    # check configuration
+    ar_var_check_exit 'server_arr host_pass host_name host_user';
 
     # check to ensure a host array exists
     if [[ ! "${!server_arr}" ]]; then

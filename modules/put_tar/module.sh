@@ -18,6 +18,12 @@ function module(){
     # source the configuration file and check required options
     source "$config_file";
 
+    # check configuration
+    ar_var_check_exit 'server_arr host_pass host_name host_user';
+    ar_var_check_exit 'origin_arr host_pass host_name host_user';
+
+
+
     # establish desired input filename
     origin_directory="$dir_backup$origin_name""/code/";
     origin_file="$origin_directory$origin_name""_code.tar.gz";
