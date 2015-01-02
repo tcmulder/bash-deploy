@@ -11,10 +11,8 @@
 function module(){
 
     # source the configuration file
-    source "$config_file";
-
-    # check configuration
-    ar_var_check_exit 'server_arr host_pass host_name host_user';
+    source "$config_file" &&
+    ar_var_check_exit 'server dir_remote host_name host_pass host_user root_remote';
 
     # check to ensure a host array exists
     if [[ ! "${!server_arr}" ]]; then

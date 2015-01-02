@@ -99,7 +99,7 @@ function ar_var_check {
     # set up arguments as array
     arg_arr=($@);
     # determine server to check
-    server_to_check="${arg_arr[0]}";
+    server_to_check="${arg_arr[0]}_arr";
     server_to_check=${!server_to_check};
     # remove server to check from array
     unset arg_arr[0];
@@ -110,13 +110,13 @@ function ar_var_check {
         # if there's no value
         if [[ $val == 'NO_VALUE' ]]; then
             # add the variable name to the missing list
-            miss+="\"$var ($server_to_check)\" ";
+            miss+="| value \"$var\" missing on server \"$server_to_check\" ";
         fi
     done
     # if there are any missing variables in the configuration
     if [[ $miss != '' ]]; then
         # alert the user what variables were missing
-        alert_error "The server is not fully configured: missing $miss";
+        alert_error "The server is not fully configured: $miss";
     # if all the variables are set then report all set for testing
     else
         echo 'set';
@@ -128,10 +128,8 @@ function ar_var_check_exit {
     var_check=`ar_var_check "$1"`;
     # if all configuration is set
     if [[ $var_check != 'set' ]]; then
-        # skip this test and alert missing items
-        echo $var_check;
-        # exit
-        exit;
+        # report error and exit
+        echo $var_check && exit;
     fi
 }
 

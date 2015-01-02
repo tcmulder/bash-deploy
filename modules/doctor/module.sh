@@ -38,7 +38,7 @@ function module(){
             big_echo "Checking SSH for \"$(ar $server_arr 'host_name')\"";
 
             # check if configuration is set
-            var_check=`ar_var_check 'host_pass host_name host_user'`;
+            var_check=`ar_var_check 'server host_pass host_name host_user'`;
             # if all configuration is set
             if [[ $var_check == 'set' ]]; then
 
@@ -73,7 +73,7 @@ function module(){
             big_echo "Checking \"$(ar $server_arr 'root_remote')\" Root Directory on \"$(ar $server_arr 'host_name')\"";
 
             # check if configuration is set
-            var_check=`ar_var_check 'host_pass host_name host_user'`;
+            var_check=`ar_var_check 'server host_pass host_name host_user'`;
             # if all configuration is set
             if [[ $var_check == 'set' ]]; then
 
@@ -103,7 +103,7 @@ function module(){
             big_echo "Checking \"$(ar $server_arr 'dir_remote')\" Project Directory on \"$(ar $server_arr 'host_name')\"";
 
             # check if configuration is set
-            var_check=`ar_var_check 'host_pass host_user host_name root_remote dir_remote'`;
+            var_check=`ar_var_check 'server host_pass host_user host_name root_remote dir_remote'`;
             # if all configuration is set
             if [[ $var_check == 'set' ]]; then
 
@@ -132,7 +132,7 @@ function module(){
             big_echo "Checking rsync Compatibility on \"$(ar $server_arr 'host_name')\"";
 
             # check if configuration is set
-            var_check=`ar_var_check 'host_pass host_user host_name'`;
+            var_check=`ar_var_check 'server host_pass host_user host_name'`;
             # if all configuration is set
             if [[ $var_check == 'set' ]]; then
 
@@ -166,7 +166,7 @@ function module(){
             big_echo "Checking tar Compatibility on \"$(ar $server_arr 'host_name')\"";
 
             # check if configuration is set
-            var_check=`ar_var_check 'host_pass host_user host_name'`;
+            var_check=`ar_var_check 'server host_pass host_user host_name'`;
             # if all configuration is set
             if [[ $var_check == 'set' ]]; then
 
@@ -201,7 +201,7 @@ function module(){
             big_echo "Checking remote \"$(ar $server_arr 'db_name')\" Database";
 
             # check if configuration is set
-            var_check=`ar_var_check 'host_pass host_user host_name db_host db_user db_pass db_name'`;
+            var_check=`ar_var_check 'server host_pass host_user host_name db_host db_user db_pass db_name'`;
             # if all configuration is set
             if [[ $var_check == 'set' ]]; then
 

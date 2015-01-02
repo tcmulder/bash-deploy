@@ -20,7 +20,6 @@
     # if the working directory isn't clean
     if [ "`$git status --porcelain`" != '' ]; then
         # tell the user
-        echo 'The working directory is unclean, which could cause problems.'
         alert_error "Unclean git directory $dir_script";
     else
         # get the local and remote sha

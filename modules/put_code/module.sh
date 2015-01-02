@@ -11,7 +11,8 @@
 function module(){
 
     # source the configuration file
-    source "$config_file";
+    source "$config_file" &&
+    ar_var_check_exit 'server dir_remote host_name host_pass host_user root_remote';
 
     # establish desired output filename
     origin_directory="$dir_backup$origin_name""/code/";

@@ -11,7 +11,8 @@
 function module(){
 
     # source the configuration file and check required options
-    source "$config_file";
+    source "$config_file" &&
+    ar_var_check_exit 'server host_pass host_user host_name db_host db_user db_pass db_name';
 
     # establish desired output filename
     dir_for_backup="$dir_backup$server_name""/db/"
