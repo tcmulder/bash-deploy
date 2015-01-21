@@ -41,9 +41,9 @@ function zen() {
             for zen_co_file in "${zen_co[@]}"
             do
                 # ask the user if they'd like to use this file
-                read -p "Use $zen_co_file? [YES|no] " confirm;
+                read -p "Use $zen_co_file? [NO|yes] " confirm;
                 # default to yes
-                confirm=${confirm:-yes};
+                confirm=${confirm:-no};
                 # if the answer is yes
                 if [ "$confirm" == yes ]; then
                     # tell the user what file is being used
