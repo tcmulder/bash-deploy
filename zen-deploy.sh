@@ -20,4 +20,3 @@ source "$dir_script"/app/update.sh;
 
 # main zen script
 source "$dir_script"/app/zen.sh;
-
