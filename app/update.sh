@@ -34,9 +34,5 @@ else
             # pull down changes
             $git pull origin $branch;
         fi
-    # if the local sha and remote sha match
-    else
-        # tell the user everything's up to date
-        echo 'The zen-deploy script is up to date'
     fi
 fi
