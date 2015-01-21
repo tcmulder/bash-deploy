@@ -47,10 +47,10 @@ function module(){
         du -ch $file_for_backup | grep total;
         if [[ -s $file_for_backup ]]; then
             # report success
-            alert_success "FAR database file dumped";
+            alert_success "Database file dumped $file_for_backup";
         else
             # exit with error
-            alert_exit "The FAR dump file is empty $file_for_backup";
+            alert_exit "Dump file is empty $file_for_backup";
         fi
     fi
 }
