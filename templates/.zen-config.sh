@@ -4,8 +4,8 @@
 # Zen Deploy Script
 # -----------------
 # version:      4.0
-# author:       Tomas Mulder <tomas@zenman.com>
-# repo:         git@git.zenman.com:tcmulder/zen-deploy.git
+# author:       Tomas Mulder
+# repo:         git@github.com:tcmulder/bash-deploy.git
 # #################################################################
 
 # -----------------------------------------------------------------
